@@ -1,30 +1,36 @@
-# ---- Build Stage ----
+# =========================================================
+# 1️⃣ Build Stage - Use Maven with Java 21
+# =========================================================
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-# Set working directory
+# Set working directory inside the image
 WORKDIR /app
 
-# Copy Maven project files
-COPY pom.xml .
-COPY src ./src
+# Copy Maven descriptor (with full relative path)
+COPY ./extension/pom.xml ./pom.xml
 
-# Package the Spring Boot app (skip tests for faster build)
+# Copy source code (all Java + resources)
+COPY ./extension/src ./src
+
+# Build the Spring Boot application (skip tests for speed)
 RUN mvn clean package -DskipTests
 
-# ---- Run Stage ----
+# =========================================================
+# 2️⃣ Runtime Stage - Use lightweight JDK image
+# =========================================================
 FROM eclipse-temurin:21-jdk-jammy
 
-# Set working directory
+# Set working directory for runtime container
 WORKDIR /app
 
-# Copy the packaged jar from build stage
-COPY --from=build /app/target/*.jar app.jar
+# Copy the generated JAR from the build stage
+COPY --from=build /app/target/*.jar ./app.jar
 
-# Expose the application port
+# Expose application port
 EXPOSE 7088
 
-# Set environment variables (optional)
+# Optional memory settings (adjust as needed)
 ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
-# Run the application
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar --server.port=7088"]
+# Run the Spring Boot application
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar ./app.jar --server.port=7088"]
