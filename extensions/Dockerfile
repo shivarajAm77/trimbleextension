@@ -7,10 +7,10 @@ FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Copy Maven descriptor (with full relative path)
-COPY ./extension/pom.xml ./pom.xml
+COPY ./extensions/pom.xml ./pom.xml
 
 # Copy source code (all Java + resources)
-COPY ./extension/src ./src
+COPY ./extensions/src ./src
 
 # Build the Spring Boot application (skip tests for speed)
 RUN mvn clean package -DskipTests
