@@ -7,6 +7,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,15 +55,24 @@ public class ExtensionController {
                 .body(bytes);
     }
 
-    // --- Serve index.js ---
-    @GetMapping("/index.js")
-    public ResponseEntity<byte[]> getJs() throws IOException {
-        ClassPathResource jsFile = new ClassPathResource("static/trimble-extension/index.js");
-        byte[] bytes = Files.readAllBytes(jsFile.getFile().toPath());
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, "application/javascript")
-                .body(bytes);
+	    // --- Serve index.js ---
+	    @GetMapping("/index.js")
+	    public ResponseEntity<byte[]> getJs() throws IOException {
+	        ClassPathResource jsFile = new ClassPathResource("static/trimble-extension/index.js");
+	        byte[] bytes = Files.readAllBytes(jsFile.getFile().toPath());
+	        return ResponseEntity.ok()
+	                .header(HttpHeaders.CONTENT_TYPE, "application/javascript")
+	                .body(bytes);
+	    }
+    @GetMapping("/icon.png")
+    public ResponseEntity<byte[]> getIcon() throws IOException {
+    	 ClassPathResource imageFile = new ClassPathResource("static/trimble-extension/icon.png");
+    	    byte[] bytes = StreamUtils.copyToByteArray(imageFile.getInputStream());
+    	    return ResponseEntity.ok()
+    	            .header(HttpHeaders.CONTENT_TYPE, MediaType.IMAGE_PNG_VALUE)
+    	            .body(bytes);
     }
+
 
     // --- Redirect API endpoint ---
     @GetMapping("/api/redirect")
