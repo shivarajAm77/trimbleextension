@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Virtuele Trimble Extension</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 1.5rem;
+      color: #222;
+    }
+    button {
+      background-color: #0078D4;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Virtuele ↔ Trimble Connect Extension</h2>
+  <p>This extension connects to the Virtuele backend and retrieves project details from Trimble Connect.</p>
+  <button id="fetchProject">Fetch Project Info</button>
+  <pre id="output"></pre>
+
+  <script src="index.js"></script>
+</body>
+</html>

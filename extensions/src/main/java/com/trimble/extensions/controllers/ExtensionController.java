@@ -23,12 +23,12 @@ public class ExtensionController {
                   "id": "virtuele-custom-extension",
                   "name": "Virtuele Extension",
                   "description": "Custom Trimble Connect extension with redirect API",
-                  "iconUrl": "https://clbdev.virtuele.us/trimble-extension/icon.png",
+                  "iconUrl": "https://trimbleextension.onrender.com/trimble-extension/icon.png",
                   "version": "1.0.0",
                   "entryPoint": {
                     "web": {
-                      "html": "https://clbdev.virtuele.us/trimble-extension/index.html",
-                      "js": "https://clbdev.virtuele.us/trimble-extension/index.js"
+                      "html": "https://trimbleextension.onrender.com/trimble-extension/index.html",
+                      "js": "https://trimbleextension.onrender.com/trimble-extension/index.js"
                     }
                   },
                   "permissions": ["workspace:read"],
