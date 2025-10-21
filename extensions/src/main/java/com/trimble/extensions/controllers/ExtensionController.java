@@ -49,7 +49,7 @@ public class ExtensionController {
     @GetMapping("/index.html")
     public ResponseEntity<byte[]> getHtml() throws IOException {
         ClassPathResource htmlFile = new ClassPathResource("static/trimble-extension/index.html");
-        byte[] bytes = Files.readAllBytes(htmlFile.getFile().toPath());
+        byte[] bytes = StreamUtils.copyToByteArray(htmlFile.getInputStream());
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_HTML_VALUE)
                 .body(bytes);
@@ -59,7 +59,7 @@ public class ExtensionController {
 	    @GetMapping("/index.js")
 	    public ResponseEntity<byte[]> getJs() throws IOException {
 	        ClassPathResource jsFile = new ClassPathResource("static/trimble-extension/index.js");
-	        byte[] bytes = Files.readAllBytes(jsFile.getFile().toPath());
+	        byte[] bytes = StreamUtils.copyToByteArray(jsFile.getInputStream());
 	        return ResponseEntity.ok()
 	                .header(HttpHeaders.CONTENT_TYPE, "application/javascript")
 	                .body(bytes);
