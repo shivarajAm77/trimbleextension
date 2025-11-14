@@ -44,6 +44,34 @@ public class ExtensionController {
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .body(manifest);
     }
+	@GetMapping("/manifest-test.json")
+    public ResponseEntity<String> getManifest() throws IOException {
+        String manifest = """
+                {
+                  "id": "virtuele-custom-extension",
+                  "name": "Virtuele Extension",
+				  "configCommand": "do_config",
+                  "description": "Custom Trimble Connect extension with redirect API",
+                  "iconUrl": "https://trimbleextension.onrender.com/trimble-extension/icon.png",
+                  "version": "1.0.0",
+                  "entryPoint": {
+                    "web": {
+                      "html": "https://trimbleextension.onrender.com/trimble-extension/index.html",
+                      "js": "https://trimbleextension.onrender.com/trimble-extension/index.js"
+                    }
+                  },
+                  "permissions": ["workspace:read"],
+                  "configCommand": {
+                    "title": "Virtuele Settings",
+                    "command": "configure"
+                  }
+                }
+                """;
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(manifest);
+    }
 
     // --- Serve index.html ---
     @GetMapping("/index.html")
