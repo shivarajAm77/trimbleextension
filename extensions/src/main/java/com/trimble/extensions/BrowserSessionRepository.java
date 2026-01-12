@@ -1,6 +1,6 @@
-package com.example.iframeauthapi.repository;
+package com.trimble.extensions;
 
-import com.example.iframeauthapi.model.BrowserSession;
+import com.trimble.extensions.controllers.BrowserSession;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BrowserSessionRepository extends JpaRepository<BrowserSession, String> {
