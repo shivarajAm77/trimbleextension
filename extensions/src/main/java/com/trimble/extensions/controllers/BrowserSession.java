@@ -1,4 +1,4 @@
-package com.example.iframeauthapi.model;
+package com.trimble.extensions.controllers;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
